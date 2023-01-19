@@ -39,12 +39,3 @@ export const deleteContacts = createAsyncThunk(
   }
 );
 
-// export const fetchContacts = () => async dispatch => {
-//   try {
-//     dispatch(fetchingInProgress());
-//     const response = await axios.get('/contacts');
-//     dispatch(fetchingSuccess(response.data))
-//   } catch (e) {
-//     dispatch(fetchingError(e.message))
-//   }
-// };

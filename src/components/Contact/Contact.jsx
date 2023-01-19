@@ -4,11 +4,11 @@ import css from './Contact.module.css';
 export const Contact = ({ contact, deleteBtn }) => {
   return (
     <>
-      {contact.map(({ name, phone, id }) => {
+      {contact.map(({ name, number, id }) => {
         return (
           <li key={id} className={css.contactItem}>
             <p>
-              {name}: {phone}
+              {name}: {number}
             </p>
             <button
               className={css.contactBtn}

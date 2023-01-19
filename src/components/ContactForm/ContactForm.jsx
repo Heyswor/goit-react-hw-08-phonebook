@@ -3,8 +3,9 @@ import css from './ContactForm.module.css';
 import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectItems } from 'redux/selectors';
-
+import Button from '@mui/material/Button';
 import { addContacts } from 'redux/operations';
+import { fetchContacts } from 'redux/contacts/operations';
 
 export function ContactForm() {
   const dispatch = useDispatch();
@@ -12,13 +13,13 @@ export function ContactForm() {
   const { register, handleSubmit, resetField } = useForm({
     defaultValues: {
       name: '',
-      phone: '',
+      number: '',
     },
   });
 
   const onHandleSubmit = values => {
     const { name } = values;
-    console.log();
+
     const findedContact = contacts.find(contact =>
       contact.name.toLowerCase().includes(name.toLowerCase())
     );
@@ -27,9 +28,10 @@ export function ContactForm() {
       return;
     } else {
       dispatch(addContacts(values));
+      dispatch(fetchContacts());
     }
     resetField('name');
-    resetField('phone');
+    resetField('number');
   };
 
   return (
@@ -51,13 +53,16 @@ export function ContactForm() {
             id={nanoid(4)}
             type="tel"
             name="number"
-            {...register('phone', {
+            {...register('number', {
               required: 'This is required',
               minLength: 6,
             })}
           />
         </label>
-        <button type="submit">Add contact</button>
+        <Button variant="contained" type="submit">
+          Add contact
+        </Button>
+       
       </form>
     </div>
   );

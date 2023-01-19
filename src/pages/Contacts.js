@@ -10,10 +10,11 @@ import {
   selectIsLoading,
   selectError,
   selectItems,
-} from 'redux/selectors';
+} from 'redux/contacts/selectors';
 import { updateFilter } from 'redux/filterSlice';
 
-import { fetchContacts, deleteContacts } from 'redux/operations';
+import { fetchContacts, deleteContact } from 'redux/contacts/operations';
+import { UserMenu } from 'components/UserMenu/UserMenu';
 
 export function Contacts() {
   const dispatch = useDispatch();
@@ -37,7 +38,7 @@ export function Contacts() {
   };
 
   const delContact = contactId => {
-    dispatch(deleteContacts(contactId));
+    dispatch(deleteContact(contactId));
   };
 
   return (
@@ -51,6 +52,7 @@ export function Contacts() {
       <Filter filter={filter} onChange={changeFilter} />
       {isLoading && !error && <b>Request in progress...</b>}
       <ContactList contacts={filtredContacts} deleteContact={delContact} />
+      <UserMenu />
     </div>
   );
 }
