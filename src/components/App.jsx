@@ -1,51 +1,19 @@
-import { ContactForm } from './ContactForm/ContactForm';
-import { ContactList } from './ContactList/ContactList';
-import { Filter } from './Filter/Filter';
-import React, { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import {
-  selectStatusFilter,
-  selectIsLoading,
-  selectError,
-  selectItems,
-} from 'redux/selectors';
-import { updateFilter } from 'redux/filterSlice';
-
-import { fetchContacts, deleteContacts } from 'redux/operations';
+import { Route, Routes } from 'react-router-dom';
+import { SharedLayout } from './SharedLayout/SharedLayout';
+import { Contacts } from 'pages/Contacts';
+import { Home } from 'pages/Home';
+import { Register } from 'pages/Register';
+import { Login } from 'pages/Login';
 
 export function App() {
-  const dispatch = useDispatch();
-  const filter = useSelector(selectStatusFilter);
-  const isLoading = useSelector(selectIsLoading);
-  const error = useSelector(selectError);
-  const contacts = useSelector(selectItems);
-  const lowercaseFilter = filter.toLowerCase();
-  const filtredContacts = contacts.filter(contact =>
-    contact.name.toLowerCase().includes(lowercaseFilter)
-  );
-
-  useEffect(() => {
-    dispatch(fetchContacts());
-  }, [dispatch]);
-
-  const changeFilter = e => {
-    dispatch(updateFilter(e.target.value));
-  };
-
-  const delContact = contactId => {
-    dispatch(deleteContacts(contactId));
-  };
-
   return (
-    <div>
-      <h1>Phonebook</h1>
-
-      <ContactForm />
-
-      <h2>Contacts</h2>
-      <Filter filter={filter} onChange={changeFilter} />
-      {isLoading && !error && <b>Request in progress...</b>}
-      <ContactList contacts={filtredContacts} deleteContact={delContact} />
-    </div>
+    <Routes>
+      <Route path="/" element={<SharedLayout />}>
+        <Route index element={<Home />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/contacts" element={<Contacts />} />
+      </Route>
+    </Routes>
   );
 }
