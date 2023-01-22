@@ -1,11 +1,12 @@
 import { Outlet } from 'react-router-dom';
 import { Link } from './SharedLayout.styled';
+import AppBar from '@mui/material/AppBar';
 
 export const SharedLayout = () => {
   return (
     <>
       <header>
-        <nav>
+        <AppBar position="static">
           <Link to="/" end>
             Home
           </Link>
@@ -18,7 +19,7 @@ export const SharedLayout = () => {
           <Link to="/contacts" end>
             Contacts
           </Link>
-        </nav>
+        </AppBar>
       </header>
       <Outlet />
     </>

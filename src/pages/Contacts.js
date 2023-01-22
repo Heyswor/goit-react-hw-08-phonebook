@@ -12,7 +12,7 @@ import {
   selectItems,
 } from 'redux/contacts/selectors';
 import { updateFilter } from 'redux/filterSlice';
-
+import Button from '@mui/material/Button';
 import { fetchContacts, deleteContact } from 'redux/contacts/operations';
 import { UserMenu } from 'components/UserMenu/UserMenu';
 
@@ -43,7 +43,19 @@ export function Contacts() {
 
   return (
     <div>
-      <Link to={backLink}>Go Back</Link>
+      <ul className="contactsLinkList">
+        <li>
+          <Link to={backLink}>
+            <Button size="small" variant="outlined">
+              Go Back
+            </Button>
+          </Link>
+        </li>
+        <li>
+          <UserMenu />
+        </li>
+      </ul>
+
       <h1>Phonebook</h1>
 
       <ContactForm />
@@ -52,7 +64,6 @@ export function Contacts() {
       <Filter filter={filter} onChange={changeFilter} />
       {isLoading && !error && <b>Request in progress...</b>}
       <ContactList contacts={filtredContacts} deleteContact={delContact} />
-      <UserMenu />
     </div>
   );
 }

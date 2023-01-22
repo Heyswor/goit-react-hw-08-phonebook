@@ -44,3 +44,18 @@ li {
 button {
   cursor: pointer;
 }
+
+.contactsLinkList {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  border: none;
+}
+
+.contactsLinkList li {
+  border: none;
+}
+
+a {
+  text-decoration: none;
+}

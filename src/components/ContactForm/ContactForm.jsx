@@ -28,10 +28,10 @@ export function ContactForm() {
       return;
     } else {
       dispatch(addContacts(values));
-      dispatch(fetchContacts());
     }
     resetField('name');
     resetField('number');
+    dispatch(fetchContacts());
   };
 
   return (
@@ -62,7 +62,6 @@ export function ContactForm() {
         <Button variant="contained" type="submit">
           Add contact
         </Button>
-       
       </form>
     </div>
   );

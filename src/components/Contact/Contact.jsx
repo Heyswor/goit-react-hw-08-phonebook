@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import css from './Contact.module.css';
+import Button from '@mui/material/Button';
 
 export const Contact = ({ contact, deleteBtn }) => {
   return (
@@ -10,13 +11,15 @@ export const Contact = ({ contact, deleteBtn }) => {
             <p>
               {name}: {number}
             </p>
-            <button
+            <Button
+            size="small"
+              variant="outlined"
               className={css.contactBtn}
               type="button"
               onClick={() => deleteBtn(id)}
             >
               delete
-            </button>
+            </Button>
           </li>
         );
       })}
