@@ -19,16 +19,19 @@ export function ContactForm() {
 
   const onHandleSubmit = values => {
     const { name } = values;
+    console.log(name.length);
 
     const findedContact = contacts.find(contact =>
       contact.name.toLowerCase().includes(name.toLowerCase())
     );
+
     if (findedContact) {
-      alert(`${findedContact.name} is already in contacts`);
-      return;
-    } else {
-      dispatch(addContacts(values));
+      if (findedContact.name.length === name.length) {
+        alert(`${findedContact.name} is already in contacts`);
+        return;
+      }
     }
+    dispatch(addContacts(values));
     resetField('name');
     resetField('number');
     dispatch(fetchContacts());
